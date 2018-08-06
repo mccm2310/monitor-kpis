@@ -1,0 +1,23 @@
+<div class="section-bar">
+    <div class="scroll-section">
+        <div class="item-section" ng-repeat="section in sections track by $index" ng-bind="section.name" ng-class="{'active-section':section.active}"
+            ng-click="setActive($index)"></div>
+    </div>
+</div>
+
+<div class="kpis-section">
+    <div class="kpis-card" ng-repeat="kpis in sectionSelected">
+        <p ng-bind="kpis.name"></p>
+        <div class="scroll-section">
+            <div class="kpis-value">
+                <span ng-bind="kpis.value"></span>
+            </div>
+            <div class="kpis-limits" ng-class="{'kpis-alert':kpis.value>kpis.limit,'kpis-normal':kpis.value<=kpis.limit}">
+                <span>{{kpis.limit}}{{kpis.unit}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btn-float" ng-if="showBtn">
+    <button class="right bottom add-btn" ng-click="addKpi()">+</button>
+</div>

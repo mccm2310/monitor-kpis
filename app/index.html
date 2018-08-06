@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+
+<html lang="en" ng-app="myApp" class="no-js main-container">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>Data Monitoring</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
@@ -14,30 +13,46 @@
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul>
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+<body class="container" ng-controller="AppCtrl">
+  <div class="main-header">
+    <button class="right btn-config" ng-click="displayConfig()" ng-class="{'mgr-160':showConfig}">Data</button>
+  </div>
+  <div class="main-menu hidden-xs">
+    <ul class="menu">
+      <li ng-repeat="item in menuItems track by $index">
+        <a ng-click="activeItem($index)" ng-bind="item" id="item-menu-{{$index}}"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="section-container mgl-0">
+    <div class="section-header">
+      <h1>Tablero de Indicadores</h1>
+    </div>
+    <div section-bar sections="sectionsItems"></div>
+    <div ng-view></div>
+  </div>
+  <div class="main-menu config-menu" ng-class="{'hidden':!showConfig}">
+    <div class="mgt-15 mgl-25">
+      <span class="config-text">Mostrar data de:</span>
+    </div>
+    <ul class="menu">
+      <li>
+        <span ng-click="setData(0)" id="item-config-0">- data1.json</span>
+      </li>
+      <li>
+        <span ng-click="setData(1)" id="item-config-1">- data2.json</span>
+      </li>
+    </ul>
+  </div>
 
-  <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
-
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
+  <!-- In production use: -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+   
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+  <script src="directives/section-bar/section-bar.js"></script>
 </body>
+
 </html>
